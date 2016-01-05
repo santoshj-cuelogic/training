@@ -1,0 +1,20 @@
+<style type="text/css">
+.login {
+	padding: 40px;
+
+}
+.login-form .form-data {
+	margin-bottom: 10px;
+}
+</style>
+<div class="login">
+<form id="loginForm" class="login-form" name="loginForm" ng-submit="userLogin(user)">
+<b>Login page</b>
+<div>
+	{{errorMsg}}
+<div class="form-data"><input type="text" id="email" name="email" value="" ng-model="user.email" /></div>
+<div><input class="form-data" type="password" id="password" name="password" value="" ng-model="user.password" /></div>
+<button type="submit">Submit</button>
+</div>
+</form>
+</div>
