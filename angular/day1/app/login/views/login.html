@@ -1,20 +1,33 @@
 <style type="text/css">
-.login {
-	padding: 40px;
+/*.login-help {
+  margin: 20px 0;
+  font-size: 11px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px #2a85a1;
 
-}
-.login-form .form-data {
-	margin-bottom: 10px;
-}
+  a {
+    color: #cce7fa;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}*/
 </style>
-<div class="login">
-<form id="loginForm" class="login-form" name="loginForm" ng-submit="userLogin(user)">
-<b>Login page</b>
-<div>
-	{{errorMsg}}
-<div class="form-data"><input type="text" id="email" name="email" value="" ng-model="user.email" /></div>
-<div><input class="form-data" type="password" id="password" name="password" value="" ng-model="user.password" /></div>
-<button type="submit">Submit</button>
-</div>
-</form>
-</div>
+<body>
+	<section class="container">
+		<div class="login">	
+		<form id="loginForm" name="loginForm" ng-submit="loginForm.$valid && userLogin(user)" novalidate>
+		<b>Login page</b>
+		<div>
+			{{errorMsg}}
+		<p><input type="email" id="email" name="email" value="" ng-model="user.email" placeholder="Email" required /></p>
+		<p><input class="form-data" type="password" id="password" name="password" value="" placeholder="Password" ng-model="user.password" required /></p>
+		<p class="submit"><button type="submit">Submit</button></p>
+		</div>
+		<div>loginForm is {{loginForm.$valid}}</div>
+		</form>
+		</div>
+	</section>
+</body>
+

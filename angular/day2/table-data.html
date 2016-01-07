@@ -1,0 +1,31 @@
+<div>
+	<table>
+		<th>Name</th><th>Cost</th>
+		<tr ng-repeat="scotch in scotches">
+			<td>{{scotch.name}}</td>
+			<td>{{scotch.price}}</td>			
+		</tr>
+	</table>
+	<!-- To accessing parent from child-->
+	<div ng-controller="oneController">
+	    <span>{{ cities }}</span>
+	    <span>{{ states }}</span>
+	    <h1>Parent Controller</h1>
+	    <!-- Emit message from child controller using emit -->
+	    <p>Emit Message : {{message}}</p>
+	    <!-- broadcast message from parent to child -->
+	    <input ng-model="msg">
+ 		<button ng-click="handleClick1(msg);">Broadcast</button>
+
+	    <div ng-controller="scotchController">
+	        <span>{{ cities }}</span>
+	        <span>{{ states }}</span>
+	        <h1>Child Controller</h1>
+	        <!-- Communicating between controller using emit -->
+	        <input ng-model="msg">
+ 			<button ng-click="handleClick(msg);">Emit</button>
+ 			<!-- Communicating between controller using broadcast -->
+ 			<p>Broadcast Message : {{message}}</p>
+	    </div>
+	</div>
+</div>
