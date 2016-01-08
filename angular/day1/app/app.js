@@ -5,8 +5,12 @@ angular.module('tandem', [
   'ngRoute',
   'user',
   'login',
-  'home'
+  'home',
+  'main',
+  'directives'
 ]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/login'});
+config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+  $routeProvider.otherwise({redirectTo: '/home'});
+
+  $httpProvider.interceptors.push('authSessionService');
 }]);

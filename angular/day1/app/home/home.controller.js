@@ -2,10 +2,11 @@ angular.module('home.controller',['services'])
 	.controller('homeCtrl',['$scope','homeService','loginService','$location','$routeParams', homeController])
 
 function homeController($scope, homeService, loginService, $location, $routeParams) {
-	$userName = homeService.getUser(loginService.email);
+	$scope.email = loginService.getStorage().email;	
+	/*$userName = homeService.getUser($scope.email);
 	if($userName)
 		$scope.userName = $userName;
-	/*else
+	else
 		$location.path("/login");*/
 
 	$scope.employees = homeService.get();
@@ -25,19 +26,18 @@ function homeController($scope, homeService, loginService, $location, $routePara
                             };
 
 		$scope.submit = function () {
-			console.log(111);
 			homeService.addEmployee($scope.emp_data);
 			$location.path("/home");
 		}
 	}
 
 	$scope.delete = function(object) {
-
-		if(confirm("Are you sure?")){
-			var deleteEmail = object.employee.email;
-			homeService.deleteEmployee(deleteEmail);
-			$location.path("/home");
-		}
+		var deleteEmail = object.employee.email;
+		homeService.deleteEmployee(deleteEmail);
+		$location.path("/home");
+		/*if(confirm("Are you sure?")){
+			
+		}*/
 	}
 
 	if($routeParams.email) {
