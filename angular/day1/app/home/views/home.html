@@ -30,6 +30,11 @@ tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }  
 
 tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+
+.selected {
+    background-color:#dff0d8;
+    color:#00FF01;
+  }
 </style>
 
 <!--<b>Home Page</b>
@@ -38,7 +43,7 @@ Hello {{userName}}-->
 <section class="container">
 <div class="editEmp">
   <h2>Employee Table</h2>
-  <div><a href="/#/add">Add Employee</a></div>
+  <div><a href="/#/add">Add Employee</a> | <a delete-selected="Are you sure you want to delete All this?" ng-click="deleteSelected()" >Delete Selected</a></div>
   <div>
   	<select ng-model="sortOrder" id="sortOption">
   		<option value="fullname">Name</option>
@@ -59,12 +64,12 @@ Hello {{userName}}-->
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="employee in employees | orderBy : sortOrder">
-        <td title="click to edit" ng-click="edit(this)">{{employee.fullname}}</td>
-        <td title="click to edit" ng-click="edit(this)">{{employee.email}}</td>
-        <td title="click to edit" ng-click="edit(this)">{{employee.age}}</td>
-        <td title="click to edit" ng-click="edit(this)">{{employee.gender}}</td>
-        <td title="click to edit" ng-click="edit(this)">{{employee.education}}</td>
+      <tr id="employee_{{employee.email}}" ng-class="{'selected':selectedRow.indexOf(employee.email) > -1}" ng-show="employee.email" ng-repeat="employee in employees | orderBy : sortOrder">
+        <td title="click to edit" ng-click="selectRow(this)" ng-dblclick="edit(this)">{{employee.fullname}}</td>
+        <td title="click to edit" ng-click="selectRow(this)" ng-dblclick="edit(this)">{{employee.email}}</td>
+        <td title="click to edit" ng-click="selectRow(this)" ng-dblclick="edit(this)">{{employee.age}}</td>
+        <td title="click to edit" ng-click="selectRow(this)" ng-dblclick="edit(this)">{{employee.gender}}</td>
+        <td title="click to edit" ng-click="selectRow(this)" ng-dblclick="edit(this)">{{employee.education}}</td>
         <td custom-alert="Are you sure you want to delete this?" ng-click="delete(this)"><button >Delete</button></td>
       </tr>      
     </tbody>

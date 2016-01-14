@@ -12,6 +12,8 @@ function homeController($scope, homeService, loginService, $location, $routePara
 	$scope.employees = homeService.get();
 	$scope.sortOrder = "fullname";
 
+	$scope.selectedRow = [];
+
 	$scope.edit = function(object) {
 		var editEmail = object.employee.email;		
 		$location.path("/edit/"+editEmail);
@@ -39,6 +41,26 @@ function homeController($scope, homeService, loginService, $location, $routePara
 			
 		}*/
 	}
+
+	//select the row
+	$scope.selectRow = function(object) {
+      if($scope.selectedRow.indexOf(object.employee.email) == -1){
+            $scope.selectedRow.push(object.employee.email);
+      }
+      else {
+        $scope.selectedRow.splice($scope.selectedRow.indexOf(object.employee.email), 1);
+      }
+    };
+
+    //delete selected rows
+    $scope.deleteSelected = function() {
+	    for (var i = $scope.selectedRow.length - 1; i >= 0; i--) {
+	        if ($scope.selectedRow[i]) {
+	            homeService.deleteEmployee($scope.selectedRow[i]);
+	            $scope.selectedRow.splice(i, 1);
+	        }
+	    }
+	};
 
 	if($routeParams.email) {
 		emplEmail = $routeParams.email;		

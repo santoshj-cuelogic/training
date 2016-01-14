@@ -1,1 +1,1 @@
-angular.module('directives',['custom-alert.directive']);
+angular.module('directives',['custom-alert.directive','save-form.directive','delete-selected.directive']);
